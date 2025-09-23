@@ -1,3 +1,12 @@
+import 'dart:io';
+
+void main() {
+  List<String> history = []; // menyimpan riwayat perhitungan
+
+  while (true) {
+    print("\n=== Aplikasi Kalkulator BMI ===");
+    stdout.write("Masukkan tinggi badan (cm): ");
+    double tinggi = double.parse(stdin.readLineSync()!);
 
     stdout.write("Masukkan berat badan (kg): ");
     double berat = double.parse(stdin.readLineSync()!);
@@ -27,3 +36,24 @@
     print("Berat  : ${berat} kg");
     print("BMI    : ${bmi.toStringAsFixed(2)}");
     print("Status : $kategori");
+
+    // ===== Riwayat Perhitungan =====
+    print("\n=== Riwayat Perhitungan ===");
+    for (int i = 0; i < history.length; i++) {
+      print("Data ke-${i + 1}:");
+      List<String> detail = history[i].split("|");
+      for (String d in detail) {
+        print("  ${d.trim()}");
+      }
+      print(""); // spasi antar data
+    }
+
+    // Tanya apakah mau lanjut
+    stdout.write("Hitung lagi? (y/n): ");
+    String? lanjut = stdin.readLineSync();
+    if (lanjut == null || lanjut.toLowerCase() != 'y') {
+      print("Terima kasih telah menggunakan Kalkulator BMI!");
+      break;
+    }
+  }
+}
